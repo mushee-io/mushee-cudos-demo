@@ -40,6 +40,6 @@ export async function POST(req: NextRequest) {
   // rotate nonce
   await sb.from("auth_nonces").upsert({ wallet_address: addr, nonce: uuidv4().slice(0, 18) });
 
-  const token = await signSession({ userId, walletAddress: addr });
+  const token = await signSession({ userId, walletAddress: addr! });
   return NextResponse.json({ token, userId });
 }
