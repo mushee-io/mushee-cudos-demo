@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   if (!ok) return NextResponse.json({ error: "invalid signature" }, { status: 401 });
 
   // Upsert user
-  let userId: string | null = null;
+  let userId: string;
   const { data: existing } = await sb.from("users").select("id").eq("wallet_address", addr).maybeSingle();
   if (existing?.id) {
     userId = existing.id;
